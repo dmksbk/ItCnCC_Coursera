@@ -1,13 +1,16 @@
 public class TxHandler {
 
+    private utxoPool pool
+
     /**
      * Creates a public ledger whose current UTXOPool (collection of unspent transaction outputs) is
      * {@code utxoPool}. This should make a copy of utxoPool by using the UTXOPool(UTXOPool uPool)
      * constructor.
      */
     public TxHandler(UTXOPool utxoPool) {
-        // IMPLEMENT THIS
+        pool = new UTXOPool(utxoPool);
     }
+
 
     /**
      * @return true if:
@@ -19,7 +22,13 @@ public class TxHandler {
      *     values; and false otherwise.
      */
     public boolean isValidTx(Transaction tx) {
-        // IMPLEMENT THIS
+        // 1. Check if all tx signatures are correct
+        for (Transaction.Input inp: tx.inputs) {
+                if (Crypto.verifySignature(, , inp.signature))
+        }
+
+
+        // 2. Check if this transaction inputs have not been spent yet
     }
 
     /**
@@ -28,7 +37,7 @@ public class TxHandler {
      * updating the current UTXO pool as appropriate.
      */
     public Transaction[] handleTxs(Transaction[] possibleTxs) {
-        // IMPLEMENT THIS
+        // IMPLEMENT THIS - do not gorget to add valid transactions to the pool after verification
     }
 
 }
